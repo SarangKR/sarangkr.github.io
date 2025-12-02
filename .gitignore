@@ -1,0 +1,31 @@
+# --- Operating System Files ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- VS Code Settings ---
+# Ignores your local workspace settings/coloring/extensions
+.vscode/
+*.code-workspace
+
+# --- Python & Data Science ---
+__pycache__/
+*.pyc
+
+# Virtual Environments
+venv/
+env/
+.venv/
+.env/
+
+# Jupyter Notebook checkpoints (if you use them later)
+.ipynb_checkpoints/
+
+# --- Security (CRITICAL) ---
+.env
+config.py
+secrets.json
+
+# --- Web / Front-End ---
+node_modules/
+dist/
