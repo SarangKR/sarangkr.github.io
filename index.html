@@ -577,14 +577,14 @@
             document.addEventListener('mousemove', e => {
                 mX = e.clientX;
                 mY = e.clientY;
-                cursorDot.style.left = mX + 'px';
-                cursorDot.style.top = mY + 'px';
+                cursorDot.style.transform = `translate(calc(${mX}px - 50%), calc(${mY}px - 50%))`;
+                cursorDot.classList.add('active');
+                cursorRing.classList.add('active');
             });
             (function animRing() {
-                rX += (mX - rX) * 0.11;
-                rY += (mY - rY) * 0.11;
-                cursorRing.style.left = rX + 'px';
-                cursorRing.style.top = rY + 'px';
+                rX += (mX - rX) * 0.12;
+                rY += (mY - rY) * 0.12;
+                cursorRing.style.transform = `translate(calc(${rX}px - 50%), calc(${rY}px - 50%))`;
                 requestAnimationFrame(animRing);
             })();
             document.querySelectorAll('a, button, .skill-card, .project-card, .certificate-card, .experience-card').forEach(el => {
