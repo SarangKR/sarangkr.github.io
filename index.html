@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="K R Sarang - Personal Portfolio">
     <title>K R Sarang - Portfolio</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%2308080f'/><text x='50' y='52' font-family='Arial, sans-serif' font-size='26' font-weight='bold' fill='%237c5cfc' text-anchor='middle' dominant-baseline='middle'>KRS</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230c0c0e'/><text x='50' y='52' font-family='Arial, sans-serif' font-size='26' font-weight='bold' fill='%234361ee' text-anchor='middle' dominant-baseline='middle'>KRS</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
@@ -15,6 +15,9 @@
     <!-- Custom Cursor -->
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
+
+    <!-- Nav backdrop overlay -->
+    <div class="nav-backdrop" id="nav-backdrop"></div>
 
     <!-- Scroll Progress Bar -->
     <div id="progress-bar"></div>
@@ -28,7 +31,12 @@
     <nav class="navbar">
         <div class="container">
             <a href="#home" class="nav-brand">K R Sarang</a>
-            <ul class="nav-menu">
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
@@ -409,6 +417,24 @@
     </footer>
 
     <script>
+        /* ── Hamburger Nav Toggle ── */
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const navBackdrop = document.getElementById('nav-backdrop');
+
+        function setNavOpen(open) {
+            navToggle.classList.toggle('open', open);
+            navMenu.classList.toggle('open', open);
+            navBackdrop.classList.toggle('visible', open);
+            navToggle.setAttribute('aria-expanded', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+        }
+        if (navToggle) {
+            navToggle.addEventListener('click', () => setNavOpen(!navMenu.classList.contains('open')));
+            navBackdrop.addEventListener('click', () => setNavOpen(false));
+            navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setNavOpen(false)));
+        }
+
         /* ── Navbar hide/show on scroll ── */
         let lastScrollTop = 0;
         const navbar = document.querySelector('.navbar');
