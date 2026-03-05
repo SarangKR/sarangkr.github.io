@@ -261,7 +261,10 @@ textarea {
     cursor: pointer;
     padding: 8px 10px;
     border-radius: 8px;
+    position: relative;
     z-index: 1002;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
     transition: border-color 0.2s ease;
 }
 .nav-toggle:hover {
@@ -287,10 +290,12 @@ textarea {
     background: rgba(0, 0, 0, 0.55);
     z-index: 998;
     opacity: 0;
+    pointer-events: none;
     transition: opacity 0.3s ease;
 }
 .nav-backdrop.visible {
     opacity: 1;
+    pointer-events: auto;
 }
 
 /* ===== HERO SECTION ===== */

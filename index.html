@@ -421,13 +421,21 @@
         const navToggle = document.getElementById('nav-toggle');
         const navMenu = document.getElementById('nav-menu');
         const navBackdrop = document.getElementById('nav-backdrop');
+        let savedScrollY = 0;
 
         function setNavOpen(open) {
             navToggle.classList.toggle('open', open);
             navMenu.classList.toggle('open', open);
             navBackdrop.classList.toggle('visible', open);
             navToggle.setAttribute('aria-expanded', open);
-            document.body.style.overflow = open ? 'hidden' : '';
+            // iOS-safe scroll lock
+            if (open) {
+                savedScrollY = window.scrollY;
+                document.body.style.cssText = `overflow:hidden;position:fixed;top:-${savedScrollY}px;width:100%;`;
+            } else {
+                document.body.style.cssText = '';
+                window.scrollTo(0, savedScrollY);
+            }
         }
         if (navToggle) {
             navToggle.addEventListener('click', () => setNavOpen(!navMenu.classList.contains('open')));
