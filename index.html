@@ -428,13 +428,7 @@
             navMenu.classList.toggle('open', open);
             navBackdrop.classList.toggle('visible', open);
             navToggle.setAttribute('aria-expanded', open);
-            if (open) {
-                savedScrollY = window.scrollY;
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-                window.scrollTo(0, savedScrollY);
-            }
+            document.body.style.overflow = open ? 'hidden' : '';
         }
         if (navToggle) {
             navToggle.addEventListener('click', () => setNavOpen(!navMenu.classList.contains('open')));
